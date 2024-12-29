@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "simple.h": "c",
+        "asoundlib.h": "c"
+    }
+}

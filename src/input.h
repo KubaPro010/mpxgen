@@ -17,7 +17,7 @@
  */
 
 #include "file_input.h"
-#include "alsa_input.h"
+#include "pulse_input.h"
 
 int8_t open_input(char *input_name, uint8_t wait, uint32_t *sample_rate, size_t num_frames);
 int8_t read_input(short *audio);

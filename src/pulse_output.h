@@ -16,6 +16,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-extern int open_alsa_output(char *output_card, unsigned int sample_rate, unsigned int channels);
-extern int write_alsa_output(short *buffer, size_t frames);
-extern int close_alsa_output();
+extern int open_pulse_output(char *output_card, unsigned int sample_rate, unsigned int channels);
+extern int write_pulse_output(short *buffer, size_t frames);
+extern int close_pulse_output();

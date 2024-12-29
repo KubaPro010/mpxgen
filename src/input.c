@@ -23,13 +23,13 @@ static uint8_t input_type;
 
 int8_t open_input(char *input_name, uint8_t wait, uint32_t *sample_rate, size_t num_frames) {
 	// TODO: better detect live capture cards
-	if (input_name[0] == 'a' && input_name[1] == 'l' &&
-	    input_name[2] == 's' && input_name[3] == 'a' &&
-	    input_name[4] == ':') { // check if name is prefixed with "alsa:"
+	if (input_name[0] == 'p' && input_name[1] == 'u' &&
+	    input_name[2] == 'l' && input_name[3] == 's' &&
+	    input_name[2] == 'e' && input_name[3] == ':') { // check if name is prefixed with "pulse:"
 		*sample_rate = 48000;
-		input_name = input_name+5; // don't pass prefix
-		if (open_alsa_input(input_name, *sample_rate, num_frames) < 0) {
-			fprintf(stderr, "Could not open ALSA source.\n");
+		input_name = input_name+6; // don't pass prefix
+		if (open_pulse_input(input_name, *sample_rate, num_frames) < 0) {
+			fprintf(stderr, "Could not open pulse source.\n");
 			return 0;
 		}
 		input_type = 2;
@@ -53,7 +53,7 @@ int8_t read_input(short *audio) {
 		if (read_file_input(audio) < 0) return -1;
 	}
 	if (input_type == 2) {
-		if (read_alsa_input(audio) < 0) return -1;
+		if (read_pulse_input(audio) < 0) return -1;
 	}
 	return 0;
 }
@@ -63,6 +63,6 @@ void close_input() {
 		close_file_input();
 	}
 	if (input_type == 2) {
-		close_alsa_input();
+		close_pulse_input();
 	}
 }

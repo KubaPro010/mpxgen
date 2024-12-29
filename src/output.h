@@ -17,7 +17,7 @@
  */
 
 #include "file_output.h"
-#include "alsa_output.h"
+#include "pulse_output.h"
 
 int open_output(char *output_name, unsigned int sample_rate, unsigned int channels);
 int write_output(short *audio, size_t frames);

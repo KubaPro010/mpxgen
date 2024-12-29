@@ -23,13 +23,13 @@ static int output_type;
 
 int open_output(char *output_name, unsigned int sample_rate, unsigned int channels) {
 	// TODO: better detect live capture cards
-	if (output_name[0] == 'a' && output_name[1] == 'l' &&
-	    output_name[2] == 's' && output_name[3] == 'a' &&
-	    output_name[4] == ':') { // check if name is prefixed with "alsa:"
-		output_name = output_name+5; // don't pass prefix
-		fprintf(stderr, "Using ALSA device \"%s\" for output.\n", output_name);
-		if (open_alsa_output(output_name, sample_rate, channels) < 0) {
-			fprintf(stderr, "Could not open ALSA sink.\n");
+	if (output_name[0] == 'p' && output_name[1] == 'u' &&
+	    output_name[2] == 'l' && output_name[3] == 's' &&
+	output_name[2] == 'e' && output_name[3] == ':') { // check if name is prefixed with "pulse:"
+		output_name = output_name+6; // don't pass prefix
+		fprintf(stderr, "Using pulse device \"%s\" for output.\n", output_name);
+		if (open_pulse_output(output_name, sample_rate, channels) < 0) {
+			fprintf(stderr, "Could not open pulse sink.\n");
 			return -1;
 		}
 		output_type = 2;
@@ -48,7 +48,7 @@ int write_output(short *audio, size_t frames) {
 		if (write_file_output(audio, frames) < 0) return -1;
 	}
 	if (output_type == 2) {
-		if (write_alsa_output(audio, frames) < 0) return -1;
+		if (write_pulse_output(audio, frames) < 0) return -1;
 	}
 
 	return 0;
@@ -59,6 +59,6 @@ void close_output() {
 		close_file_output();
 	}
 	if (output_type == 2) {
-		close_alsa_output();
+		close_pulse_output();
 	}
 }
