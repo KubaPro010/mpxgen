@@ -19,7 +19,7 @@
 #include "common.h"
 #include <pulse/simple.h>
 
-pa_simple *device;
+pa_simple *device2;
 int8_t open_pulse_output(char *output_device, unsigned int sample_rate, unsigned int channels) {
 	int err;
 	pa_sample_spec format;
@@ -27,8 +27,8 @@ int8_t open_pulse_output(char *output_device, unsigned int sample_rate, unsigned
 	format.channels = channels;
 	format.rate = sample_rate;
 
-	device = pa_simple_new(NULL, "mpxgen", PA_STREAM_RECORD, output_device, "mpxgen", &format, NULL, NULL, NULL);
-	if(device == NULL) {
+	device2 = pa_simple_new(NULL, "mpxgen", PA_STREAM_RECORD, output_device, "mpxgen", &format, NULL, NULL, NULL);
+	if(device2 == NULL) {
 		fprintf(stderr, "Error: failed to open audio device\n");
 		return -1;
 	}
@@ -38,19 +38,19 @@ int8_t open_pulse_output(char *output_device, unsigned int sample_rate, unsigned
 
 int16_t write_pulse_output(short *buffer, size_t frames) {
 	int frames_written;
-	frames_written = pa_simple_write(device, buffer, frames, NULL);
+	frames_written = pa_simple_write(device2, buffer, frames, NULL);
 	return frames_written;
 }
 
 int8_t close_pulse_output() {
 	int err;
 
-	err = pa_simple_drain(device, NULL);
+	err = pa_simple_drain(device2, NULL);
 	if (err < 0) {
 		fprintf(stderr, "Error: could not drain sink\n");
 		return -1;
 	}
-	pa_simple_free(device);
+	pa_simple_free(device2);
 
 	return 0;
 }
