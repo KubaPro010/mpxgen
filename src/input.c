@@ -25,7 +25,7 @@ int8_t open_input(char *input_name, uint8_t wait, uint32_t *sample_rate, size_t 
 	// TODO: better detect live capture cards
 	if (input_name[0] == 'p' && input_name[1] == 'u' &&
 	    input_name[2] == 'l' && input_name[3] == 's' &&
-	    input_name[2] == 'e' && input_name[3] == ':') { // check if name is prefixed with "pulse:"
+	    input_name[3] == 'e' && input_name[4] == ':') { // check if name is prefixed with "pulse:"
 		*sample_rate = 48000;
 		input_name = input_name+6; // don't pass prefix
 		if (open_pulse_input(input_name, *sample_rate, num_frames) < 0) {

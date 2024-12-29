@@ -21,7 +21,6 @@
 
 pa_simple *device2;
 int8_t open_pulse_output(char *output_device, unsigned int sample_rate, unsigned int channels) {
-	int err;
 	pa_sample_spec format;
 	format.format = PA_SAMPLE_S16LE;
 	format.channels = channels;
