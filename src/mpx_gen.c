@@ -337,8 +337,8 @@ static uint8_t check_mpx_vol(uint8_t volume) {
 
 int main(int argc, char **argv) {
 	int opt;
-	char audio_file[51] = {0};
-	char output_file[51] = {0};
+	char audio_file[64] = {0};
+	char output_file[64] = {0};
 	char control_pipe[51] = {0};
 	uint8_t rds = 1;
 	struct rds_params_t rds_params = {
@@ -391,11 +391,11 @@ int main(int argc, char **argv) {
 	while ((opt = getopt_long(argc, argv, short_opt, long_opt, NULL)) != -1) {
 		switch (opt) {
 			case 'a': //audio
-				strncpy(audio_file, optarg, 50);
+				strncpy(audio_file, optarg, 63);
 				break;
 
 			case 'o': //output-file
-				strncpy(output_file, optarg, 50);
+				strncpy(output_file, optarg, 63);
 				break;
 
 			case 'm': //mpx
