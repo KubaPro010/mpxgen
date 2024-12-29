@@ -6,8 +6,8 @@ CC = gcc
 CFLAGS = -Wall -Wextra -O2 -std=gnu99 -pedantic
 
 obj = mpx_gen.o rds.o waveforms.o fm_mpx.o control_pipe.o mpx_carriers.o \
-	resampler.o input.o file_input.o ssb.o output.o alsa_output.o \
-	file_output.o alsa_input.o rds_modulator.o rds_lib.o
+	resampler.o input.o file_input.o ssb.o output.o pulse_output.o \
+	file_output.o pulse_input.o rds_modulator.o rds_lib.o
 libs = -lm -lsndfile -lsamplerate -lpthread -lasound
 
 ifeq ($(RDS2), 1)
